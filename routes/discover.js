@@ -3,7 +3,7 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var Recipe = require('../models/Recipe.js');
 
-// api/v1/discover?page=1
+// api/v1.0/discover?page=1
 router.get('/', function(req, res, next){
 	var nextPage = req.query.page;
 	if(nextPage == null) nextPage = 1;
@@ -12,7 +12,7 @@ router.get('/', function(req, res, next){
 	// find recipes and order by id
 	Recipe.paginate({}, {
 		page: nextPage,
-		columns: 'url title yield totalTime photo publisher ingredients directions',
+		columns: 'url title yield totalTime photo publisher',
 		limit: 10,
 		sortBy: {
 			_id: 1
