@@ -9,6 +9,7 @@ var mongoose = require('mongoose');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var webhooks = require('./routes/webhooks');
+var discover = require('./routes/discover');
 
 var app = express();
 
@@ -26,6 +27,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/webhooks', webhooks);
+app.use('/api/v1/discover', discover);
+// app.use('/api/v1/search');
 
 // db connection
 mongoose.connect('mongodb://localhost/chefnote', function(err){
