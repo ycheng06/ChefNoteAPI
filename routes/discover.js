@@ -12,7 +12,7 @@ router.get('/', function(req, res, next){
 	// find recipes and order by id
 	Recipe.paginate({}, {
 		page: nextPage,
-		columns: 'url title yield totalTime photo publisher',
+		columns: 'basic',
 		limit: 10,
 		sortBy: {
 			_id: 1

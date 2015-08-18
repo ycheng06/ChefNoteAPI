@@ -36,45 +36,46 @@ function insertDataFromKimonoAPI(results, defaultPublisher){
 				var basicInfo = result.basicInfo;
 
 				// Set the recipe url
-				recipe.url = result.url;
+				recipe.basic.url = result.url;
 
 				if(basicInfo != null){
 
 					// Photo... skip this recipe if it doesn't have photo
 					var photo = basicInfo[0].photo;
 					if(photo != null)
-						recipe.photo = photo.src;
+						recipe.basic.photo = photo.src;
 					else
 						return; 
 
 					// Title... skip recipe if it doesn't have a title
 					var title = basicInfo[0].name;
 					if(title != null)
-						recipe.title = title;
+						recipe.basic.title = title;
 					else
 						return;
 
 					// Yield (how many servings)
 					var yield = basicInfo[0].yeild;
 					if(yield != null) 
-						recipe.yield = String(yield);
+						recipe.basic.yield = String(yield);
 
 			  		// Total Time
 			  		var totalTime = basicInfo[0].totalTime;
 			  		if(totalTime != null)
-						recipe.totalTime = String(totalTime);
+						recipe.basic.totalTime = String(totalTime);
 
 					// Publisher
 					var publisher = basicInfo[0].publisher;
 					if(publisher != null)
-						recipe.publisher = String(publisher);
+						recipe.basic.publisher = String(publisher);
 					else
-						recipe.publisher = defaultPublisher;
+						recipe.basic.publisher = defaultPublisher;
 
 					// Author
 					var author = basicInfo[0].author;
 					if(author != null)
-						recipe.author = String(author);
+						recipe.basic.author = String(author);
+
 				}
 				else{
 					// Skip recipe if basic info doesn't exist... bad data
