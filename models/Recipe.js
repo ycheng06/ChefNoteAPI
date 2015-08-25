@@ -11,12 +11,13 @@ var RecipeSchema = new mongoose.Schema({
 		photo: String, 
 		url: String
 	},
-	ingredients: [String],
+	ingredients: {type: [String], trim: true, index: true},
 	directions: [String],
 	createdAt: {type: Date, default: Date.now},
 	updateAt: {type: Date, default: Date.now}
 });
 
+// Add plugin
 RecipeSchema.plugin(mongoosePaginate);
 
 module.exports = mongoose.model('Recipe', RecipeSchema);

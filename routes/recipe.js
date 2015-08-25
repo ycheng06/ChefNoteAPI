@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 var Recipe = require('../models/Recipe.js');
-var Ingreedy = require('../ingredientParser.js');
 
 // api/v1.0/recipe/:recipeId
 router.get('/:recipeId', function(req, res, next){
@@ -13,17 +12,10 @@ router.get('/:recipeId', function(req, res, next){
 	if(recipeId){
 		var query = Recipe.where({ _id:recipeId}).select('url title yield totalTime photo publisher ingredients directions');
 		query.findOne(function(err, recipe){
-			if(err) return handleError(err);
-			if(recipe){
-				recipe.ingredients.forEach(function(step){
-					console.log(step);
-					var ingreedy = Ingreedy.parse(step);
-					if(ingreedy){
-						console.log(ingreedy.amount);
-						console.log(ingreedy.unit);
-						console.log(ingreedy.ingredient);
-					}
-				});
+			if(err){
+				next(err);
+			} 
+			else {
 				res.json({
 					status: 200,
 					result: recipe	

@@ -19,11 +19,11 @@ router.get('/', function(req, res, next){
 		}
 	}, function(err, results, pageCount, itemCount){
 		if(err){
-			res.status(500);
-			res.send("error");
+			next(err);
 		}
 		else {
 			res.json({
+				status: 200,
 				page: nextPage,
 				recipes: results
 			});

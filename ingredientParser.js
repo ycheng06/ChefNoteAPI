@@ -33,7 +33,7 @@ module.exports = (function() {
         peg$startRuleFunction  = peg$parsestart,
 
         peg$c0 = [],
-        peg$c1 = peg$FAILED,
+        peg$c1 = peg$FILED,
         peg$c2 = null,
         peg$c3 = /^[\n]/,
         peg$c4 = { type: "class", value: "[\\n]", description: "[\\n]" },

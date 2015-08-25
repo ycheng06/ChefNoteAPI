@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 var Recipe = require('../models/Recipe.js');
+var Ingredient = require('../models/Ingredient.js');
 
 /* hook for epicurious api */
 router.post('/epicurious', function(req, res, next) {
@@ -40,39 +41,40 @@ function insertDataFromKimonoAPI(results, defaultPublisher){
 
 				if(basicInfo != null){
 
+					var info = basicInfo[0];
 					// Photo... skip this recipe if it doesn't have photo
-					var photo = basicInfo[0].photo;
+					var photo = info.photo;
 					if(photo != null)
 						recipe.basic.photo = photo.src;
 					else
 						return; 
 
 					// Title... skip recipe if it doesn't have a title
-					var title = basicInfo[0].name;
+					var title = info.name;
 					if(title != null)
 						recipe.basic.title = title;
 					else
 						return;
 
 					// Yield (how many servings)
-					var yield = basicInfo[0].yeild;
+					var yield = info.yeild;
 					if(yield != null) 
 						recipe.basic.yield = String(yield);
 
 			  		// Total Time
-			  		var totalTime = basicInfo[0].totalTime;
+			  		var totalTime = info.totalTime;
 			  		if(totalTime != null)
 						recipe.basic.totalTime = String(totalTime);
 
 					// Publisher
-					var publisher = basicInfo[0].publisher;
+					var publisher = info.publisher;
 					if(publisher != null)
 						recipe.basic.publisher = String(publisher);
 					else
 						recipe.basic.publisher = defaultPublisher;
 
 					// Author
-					var author = basicInfo[0].author;
+					var author = info.author;
 					if(author != null)
 						recipe.basic.author = String(author);
 
@@ -97,10 +99,13 @@ function insertDataFromKimonoAPI(results, defaultPublisher){
 			  		});
 				}
 
+				
+
 				recipe.save(function(err, product, numberAffected){
 					if(err){
 						console.error(err);
 					}
+					
 				});
 			}
 		});
