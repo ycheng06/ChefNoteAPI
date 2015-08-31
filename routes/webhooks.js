@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 var Recipe = require('../models/Recipe.js');
-var Ingredient = require('../models/Ingredient.js');
 
 /* hook for epicurious api */
 router.post('/epicurious', function(req, res, next) {
@@ -98,8 +97,6 @@ function insertDataFromKimonoAPI(results, defaultPublisher){
 			  			recipe.directions.push(String(step.direction));
 			  		});
 				}
-
-				
 
 				recipe.save(function(err, product, numberAffected){
 					if(err){

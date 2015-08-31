@@ -7,7 +7,8 @@ var Recipe = require('../models/Recipe.js');
 router.get('/', function(req, res, next){
 	var keyword = req.query.keyword;
 
-	var query = Recipe.where({$text: {$search: '\"' + keyword + '\"'}});
+	// using text search to search for ingredients
+	var query = Recipe.where({$text: {$search: '\"' + keyword + '\"'}}).select("basic");
 
 	query.find(function(err, output){
 		if(err){
