@@ -22,6 +22,15 @@ router.get('/', function(req, res, next){
 			next(err);
 		}
 		else {
+
+			// for develope purpose to simulate conneciton latency
+			// setTimeout((function(){
+			// 	res.json({
+			// 	status: 200,
+			// 	page: nextPage,
+			// 	recipes: results
+			// })}), 2000);
+			
 			res.json({
 				status: 200,
 				page: nextPage,

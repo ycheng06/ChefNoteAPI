@@ -34,7 +34,7 @@ app.use('/api/v1.0/recipe', recipe); //all data of a recipe
 app.use('/api/v1.0/search', search);
 
 // db connection
-mongoose.connect('mongodb://localhost/chefnote', function(err){
+mongoose.connect('mongodb://gordonramsey:hellskitchen@ds035503.mongolab.com:35503/chefnote', function(err){
   if(err) {
     console.log('connection error', err);
   } else {
