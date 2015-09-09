@@ -27,7 +27,7 @@ router.post('/chow', function(req, res, next) {
 });
 
 router.post('/norecipes', function(req, res, next){
-	var isSucessful = insertDataFromKimonoAPI(req, "NoRecipes");
+	var isSuccessful = insertDataFromKimonoAPI(req, "NoRecipes");
 
 	if (isSuccessful){
 		res.send("recipe webhook update sucessful");
@@ -46,9 +46,8 @@ function insertDataFromKimonoAPI(request, defaultPublisher){
 	else {
 		//check for empty results first
 		var results = request.body.results;
-
 		results.forEach(function(result){
-			// console.log(result);
+
 			// Run a query to search for the recipe in db first
 			var query = Recipe.where({'basic.url':result.url});
 			query.findOne(function(err, recipe){
@@ -63,10 +62,10 @@ function insertDataFromKimonoAPI(request, defaultPublisher){
 					recipe.basic.url = result.url;
 
 					if(basicInfo != null){
-
 						var info = basicInfo[0];
 						// Photo... skip this recipe if it doesn't have photo
 						var photo = info.photo;
+
 						if(photo != null)
 							recipe.basic.photo = photo.src;
 						else
@@ -113,7 +112,7 @@ function insertDataFromKimonoAPI(request, defaultPublisher){
 
 							var ingredientString = ""
 							if(defaultPublisher == "NoRecipes"){
-								ingredientString = step.quantity + step.unit + step.ingredient;
+								ingredientString = step.quantity + " " + step.unit + " " + step.ingredient;
 							}
 							else {
 								ingredientString = step.ingredient;
@@ -140,8 +139,8 @@ function insertDataFromKimonoAPI(request, defaultPublisher){
 				}
 			});
 		});
+		return true;
 	}
-	return true;
 }
 
 module.exports = router;
