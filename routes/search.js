@@ -12,6 +12,7 @@ router.get('/', function(req, res, next){
 
 	query.find(function(err, output){
 		if(err){
+			// console.log(err)
 			next(err);
 		}
 		else {

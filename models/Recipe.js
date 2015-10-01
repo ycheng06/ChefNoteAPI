@@ -11,7 +11,7 @@ var RecipeSchema = new mongoose.Schema({
 		photo: String, 
 		url: String
 	},
-	ingredients: {type: [String], trim: true, index: true},
+	ingredients: {type: [String], trim: true},
 	directions: [String],
 	createdAt: {type: Date, default: Date.now},
 	updateAt: {type: Date, default: Date.now}
