@@ -32,4 +32,27 @@ router.get('/:recipeId', function(req, res, next){
 	}
 });
 
+// api/v1.0/recipe/recipes
+router.post('/recipes', function(req, res, next){
+	var recipeIds = req.body.recipeIds
+
+	if(recipeIds.length > 0){
+		var query = Recipe.where({_id: {$in: recipeIds}}).select('basic');
+		query.find(function(err, recipes){
+			console.log(recipes);
+			res.json({
+				status: 200,
+				result: recipes 
+			});
+		});
+	}
+	else {
+		res.status(500);
+		res.json({
+			status: 500,
+			result: 'Not Found'
+		});
+	}
+});
+
 module.exports = router;
